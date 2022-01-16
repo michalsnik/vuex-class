@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import { createDecorator } from 'vue-class-component'
+import { createDecorator, Vue } from 'vue-class-component'
 import {
   mapState,
   mapGetters,
@@ -96,8 +95,8 @@ function createBindingHelper (
       const mapObject = { [key]: map }
 
       componentOptions[bindTo]![key] = namespace !== undefined
-        ? mapFn(namespace, mapObject)[key]
-        : mapFn(mapObject)[key]
+        ? (mapFn as any)(namespace, mapObject)[key]
+        : (mapFn as any)(mapObject)[key]
     })
   }
 
